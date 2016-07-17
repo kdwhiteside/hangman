@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HANGMAN</title>
+</head>
+<body>
+	<h2 id="display"></h2><br>
+	<h3 id="lives"></h3>
+
+</body>
+<script type="text/javascript">
+	
+document.addEventListener("load", pickWord());
+
+
+
+
+
+
+
+
+
+
+
+
+	function pickWord(){
+		var words = ["charmander", "bulbasaur", "squirtle"];
+		theWord = words[Math.floor((Math.random() * words.length))];
+		console.log(theWord);
+		wordArray = theWord.split("");
+		for (var i = 0; i < wordArray.length; i++) {
+			wordArray[i] = " _ ";
+			
+		}
+		console.log(wordArray);
+		guessesLeft = 7;
+		document.getElementById("lives").innerHTML = "YOU HAVE " + guessesLeft + " LIVES";
+		document.getElementById("display").innerHTML = wordArray.join(" ");
+		// console.log(document.getElementById("display").innerHTML);
+	}
+
+	
+document.addEventListener("keydown", testLetter);
+
+
+	function testLetter(event){
+		letter = event.key;
+		console.log(letter);
+		var index = theWord.indexOf(letter);
+		if (theWord.includes(event.key) === true) {	
+			for (var i = 0; i < wordArray.length; i++) {
+				if(theWord[i] == letter){
+					wordArray[i] = letter;
+
+
+				}
+			}
+			document.getElementById("display").innerHTML = wordArray.join(" ");
+			// console.log(wordArray);
+			
+
+
+
+
+			if(wordArray.join("") == theWord){
+				alert("YOU WIN!");
+				var newGame = confirm("WOULD YOU LIKE TO PLAY AGAIN?");
+				if (newGame == true) {
+					pickWord();
+			}
+		}
+	}
+		else{
+
+			guessesLeft--;
+			document.getElementById("lives").innerHTML = "YOU HAVE " + guessesLeft + " LIVES";
+			
+			if (guessesLeft < 1) {
+				alert("YOU LOSE!");
+				var newGame = confirm("WOULD YOU LIKE TO PLAY AGAIN?");
+				if (newGame == true) {
+					pickWord();
+				}
+			}
+		}
+
+
+
+
+
+
+
+
+
+
+
+
+		
+	// 	else{
+	// 		alert("YOU ARE A LOSER");
+
+
+
+
+
+	}
+
+
+
+
+	// }
+
+
+
+
+
+
+</script>
+</html>
